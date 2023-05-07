@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SpawnRed
+  - SpawnBlue
+  - SpawnYellow
+  - SpawnGreen
+  - Green
+  - Red
+  - Blue
+  - Yellow
   layers:
   - Default
   - TransparentFX
