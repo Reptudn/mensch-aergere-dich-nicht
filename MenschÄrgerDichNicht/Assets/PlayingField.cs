@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayingField : MonoBehaviour
 {
 
+    [Header("Game Settings")]
+    public int specialFields = 0;
+
+    [Header("SetUp")]
     public GameObject[] field; //40 felder: feld 0 ist  release-feld bei grün
     public GameObject[] greenSpawn;
     public GameObject[] blueSpawn;
@@ -37,6 +41,27 @@ public class PlayingField : MonoBehaviour
             Instantiate(figurePrefab, new Vector3(blueSpawn[i].transform.position.x, blueSpawn[i].transform.position.y, blueSpawn[i].transform.position.z), blueSpawn[i].transform.rotation).SendMessage("SetTeam", Team.BLUE);
             Instantiate(figurePrefab, new Vector3(redSpawn[i].transform.position.x, redSpawn[i].transform.position.y, redSpawn[i].transform.position.z), redSpawn[i].transform.rotation).SendMessage("SetTeam", Team.RED);
             Instantiate(figurePrefab, new Vector3(yellowSpawn[i].transform.position.x, yellowSpawn[i].transform.position.y, yellowSpawn[i].transform.position.z), yellowSpawn[i].transform.rotation).SendMessage("SetTeam", Team.YELLOW);
+
+        }
+
+        GenerateFields();
+
+    }
+
+    void GenerateFields(){
+
+        int i = 0;
+        while(i < specialFields){
+
+            Field o = field[Random.Range(0, field.Length)].GetComponent<Field>();
+            if(o.type == FieldType.NORMAL && o.canBeSpecialField){
+                
+                //nochmal random wenn mehr als ein special Field
+                o.type = FieldType.SAFE;
+
+                i++;
+
+            }
 
         }
 
