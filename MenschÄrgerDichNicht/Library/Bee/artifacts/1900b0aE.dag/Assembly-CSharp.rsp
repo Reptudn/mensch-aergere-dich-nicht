@@ -361,7 +361,6 @@
 "Assets/Scripts/Field.cs"
 "Assets/Scripts/GameFigure.cs"
 "Assets/Scripts/Interfaces/IInteractable.cs"
-"Assets/Scripts/leude.cs"
 "Assets/Scripts/MouseHandler.cs"
 -langversion:9.0
 
