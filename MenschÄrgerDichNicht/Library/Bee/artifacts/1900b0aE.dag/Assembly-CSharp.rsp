@@ -361,7 +361,9 @@
 "Assets/Scripts/Field.cs"
 "Assets/Scripts/GameFigure.cs"
 "Assets/Scripts/Interfaces/IInteractable.cs"
+"Assets/Scripts/Menu/MainMenuHandler.cs"
 "Assets/Scripts/MouseHandler.cs"
+"Assets/Scripts/test.cs"
 -langversion:9.0
 
 /deterministic
