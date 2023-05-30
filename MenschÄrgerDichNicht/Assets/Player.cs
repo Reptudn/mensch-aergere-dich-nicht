@@ -14,11 +14,14 @@ public class Player
     public GameObject playingField;
     public bool isAI;
 
-    public Player(string playerName, Team teamColor, Sprite playerLogo, bool isAI = false){
+    public Color color;
+
+    public Player(string playerName, Team teamColor, Sprite playerLogo, Color color, bool isAI = false){
         this.teamColor = teamColor;
         this.playerName = playerName;
         this.playerLogo = playerLogo;
         this.isAI = isAI;
+        this.color = color;
     }
     
     private bool canMove = false;
