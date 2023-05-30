@@ -11,8 +11,9 @@ public class SpielerAuswahlHandler : MonoBehaviour
 
    void Start()
    {
-      dropdown.onValueChanged.AddListener((dropdown.value) =>
+      dropdown.onValueChanged.AddListener(delegate
       {
+         int index = dropdown.value;
          Debug.Log("Index: " + index);
          switch (index)
          {
