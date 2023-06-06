@@ -16,10 +16,10 @@ public class Game : MonoBehaviour
     {
         players = new Player[playerCount];
         for(int i = 0; i < playerCount; i++){
-            players[i] = new Player("test", (Team)i, null, false);
+            players[i] = new Player("test", (Team)i, null, Color.red, false);
         }
         for(int i = 0; i < players.Length; i++){
-            if(players[i] == null) players[i] = new Player("test", (Team)i, null, true);
+            if(players[i] == null) players[i] = new Player("test", (Team)i, null, Color.blue, true);
         }
     }
 
