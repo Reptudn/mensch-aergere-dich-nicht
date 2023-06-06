@@ -5,7 +5,6 @@ using UnityEngine;
 public enum DiceType {
 
     Normal = 6,
-    MOREIDK = 8
 
 }
 
@@ -15,12 +14,14 @@ public class Dice : MonoBehaviour, IInteractable
     public DiceType type = DiceType.Normal;
 
     public GameObject normal; //six sides
-    public GameObject moreidk;
+  
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
         if(type == DiceType.Normal) normal.SetActive(true);
+        cam = Camera.main;
     }
 
     // Update is called once per frame
