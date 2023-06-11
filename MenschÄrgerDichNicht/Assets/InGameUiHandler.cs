@@ -11,6 +11,8 @@ public class InGameUiHandler : MonoBehaviour
     public GameObject kickOut;
     public GameObject illegalMove;
 
+    public GameObject[] turnsIdk;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +33,19 @@ public class InGameUiHandler : MonoBehaviour
 
     public void NextPlayer() => ResetRoll();
 
+    int turns = 0;
     void ResetRoll(){
         youRolled.SetActive(false);
         rollDiceBtn.SetActive(true);
         youRolled.GetComponent<Text>().text = "You rolled: ...";
+
+
+        
+        turns++;
+        if(turns > 3) {
+            turns = 0;
+        }
+        Show(turnsIdk[turns]);
     }
 
     public void ShowKickOut(string kicker, string kickedOut){
@@ -64,5 +75,14 @@ public class InGameUiHandler : MonoBehaviour
 
     IEnumerator Wait(){
         yield return new WaitForSeconds(0.3f);
+    }
+
+    private void Show(GameObject o){
+        foreach(GameObject a in turnsIdk){
+
+            if(a == o) o.SetActive(true);
+            else a.SetActive(false);
+
+        }
     }
 }

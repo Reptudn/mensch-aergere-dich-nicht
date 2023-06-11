@@ -34,6 +34,8 @@ public class GameFigure : MonoBehaviour, IInteractable
 
 
     bool run = false;
+    bool _continue = true;
+
     public void OnLeftClick(){
 
         if(run) return;
@@ -52,28 +54,32 @@ public class GameFigure : MonoBehaviour, IInteractable
 
                 case Team.RED:
                     selfIndex = 10;
-                    CheckMove(selfIndex);
+                    CheckMove(selfIndex, true);
+                    if(!_continue) break;
                     PlayingField.field[selfIndex].GetComponent<Field>().figure = transform.gameObject;
                     transform.position = PlayingField.field[selfIndex].transform.position;
                     break;
 
                 case Team.GREEN:
                     selfIndex = 0;
-                    CheckMove(selfIndex);
+                    CheckMove(selfIndex, true);
+                    if(!_continue) break;
                     PlayingField.field[selfIndex].GetComponent<Field>().figure = transform.gameObject;
                     transform.position = PlayingField.field[selfIndex].transform.position;
                     break;
 
                 case Team.YELLOW:
                     selfIndex = 20;
-                    CheckMove(selfIndex);
+                    CheckMove(selfIndex, true);
+                    if(!_continue) break;
                     PlayingField.field[selfIndex].GetComponent<Field>().figure = transform.gameObject;
                     transform.position = PlayingField.field[selfIndex].transform.position;
                     break;
 
                 case Team.BLUE:
                     selfIndex = 30;
-                    CheckMove(selfIndex);
+                    CheckMove(selfIndex, true);
+                    if(!_continue) break;
                     Debug.Log(PlayingField.field[selfIndex].GetComponent<Field>().figure);
                     PlayingField.field[selfIndex].GetComponent<Field>().figure = transform.gameObject;
                     transform.position = PlayingField.field[selfIndex].transform.position;
@@ -86,7 +92,7 @@ public class GameFigure : MonoBehaviour, IInteractable
             int newIndex = selfIndex + amount;
             if(newIndex > 40) newIndex -= 40;
 
-            CheckMove(newIndex);
+            CheckMove(newIndex, false);
 
             PlayingField.field[selfIndex].GetComponent<Field>().figure = null;
             PlayingField.field[newIndex].GetComponent<Field>().figure = transform.gameObject;
@@ -95,6 +101,7 @@ public class GameFigure : MonoBehaviour, IInteractable
             selfIndex = newIndex;
 
         }
+
 
         Debug.Log("New Index " + selfIndex);
         StartCoroutine(Wait());
@@ -134,9 +141,10 @@ public class GameFigure : MonoBehaviour, IInteractable
     } 
 
     IEnumerator Wait(){
-        yield return new WaitForSeconds(1f);
-        game.NextPlayer();
+        yield return new WaitForSeconds(0.5f);
+        if(_continue) game.NextPlayer();
         run = false;
+        _continue = true;
     }
 
     public void KickOut(){
@@ -172,27 +180,57 @@ public class GameFigure : MonoBehaviour, IInteractable
 
     }
 
-    void CheckMove(int newIndex){
+    void CheckMove(int newIndex, bool start){
 
-        var newField = PlayingField.field[newIndex].GetComponent<Field>();
+        if(!start){
 
-        if(newField.figure == null) return; //field empty
+            var newField = PlayingField.field[newIndex].GetComponent<Field>();
 
-        if(newField.figure.GetComponent<GameFigure>().team == team){
+            if(newField.figure == null) return; //field empty
 
-            //same team
-            //show cannot move
-            ui.ShowIllegalMove();
+            if(newField.figure.GetComponent<GameFigure>().team == team){
+
+                //same team
+                //show cannot move
+                ui.ShowIllegalMove();
+
+
+            } else {
+
+                //other team
+                //kick out other figure
+                var otherFigure = newField.figure.GetComponent<GameFigure>();
+                otherFigure.KickOut();
+
+                ui.ShowKickOut(team.ToString(), otherFigure.team.ToString());
+                
+            }
 
         } else {
 
-            //other team
-            //kick out other figure
-            var otherFigure = newField.figure.GetComponent<GameFigure>();
-            otherFigure.KickOut();
+            var newField = PlayingField.field[newIndex].GetComponent<Field>();
 
-            ui.ShowKickOut(team.ToString(), otherFigure.team.ToString());
-            
+            if(newField.figure == null) return; //field empty
+
+            if(newField.figure.GetComponent<GameFigure>().team == team){
+
+                //same team
+                //show cannot move
+                ui.ShowIllegalMove();
+                _continue = false;
+
+
+            } else {
+
+                //other team
+                //kick out other figure
+                var otherFigure = newField.figure.GetComponent<GameFigure>();
+                otherFigure.KickOut();
+
+                ui.ShowKickOut(team.ToString(), otherFigure.team.ToString());
+                
+            }
+
         }
 
     }

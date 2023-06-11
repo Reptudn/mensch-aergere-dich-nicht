@@ -34,7 +34,7 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow)) NextPlayer();
+        //if(Input.GetKeyDown(KeyCode.LeftArrow)) NextPlayer();
     }
 
     public void NextPlayer(){

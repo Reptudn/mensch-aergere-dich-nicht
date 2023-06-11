@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuHandler : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class MainMenuHandler : MonoBehaviour
     
     public void SpielStarten()
     {
-        Auswahl(spielStarten);
+        SceneManager.LoadScene(1);
     }
 
     public void Einstellungen()
