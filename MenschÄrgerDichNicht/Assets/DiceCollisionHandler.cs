@@ -30,7 +30,7 @@ public class DiceCollisionHandler : MonoBehaviour
     void OnCollisionEnter(Collision collision){
 
         string name = collision.gameObject.name;
-        Debug.Log("Colliding: " + name);
+        //Debug.Log("Colliding: " + name);
 
         switch(name){
 
@@ -59,7 +59,7 @@ public class DiceCollisionHandler : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("Invalid Collision!");
+                //Debug.Log("Invalid Collision!");
                 break;
 
         }

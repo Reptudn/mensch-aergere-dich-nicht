@@ -14,6 +14,8 @@ public class Player
     public GameObject playingField;
     public bool isAI;
 
+    public int onField = 0;
+
     public Player(string playerName, Team teamColor, Sprite playerLogo, bool isAI = false){
         this.teamColor = teamColor;
         this.playerName = playerName;
@@ -23,12 +25,38 @@ public class Player
     
     private bool canMove = false;
     public void Move(GameObject obj, int amount){
+
+        //if(!canMove) return;
+
         moveCount++;
         canMove = false;
     }
 
+    public void AiMove(int amount, int[] selfFigureIndexes, GameObject[] allFigures){
+
+        if(!canMove) return;
+
+        moveCount++;
+
+    }
+
     public void CanMove(){
+        
         canMove = true;
+    }
+
+
+    private int throwCount = 0;
+    public bool isDone(){
+
+        if(moveCount == 0 || onField == 0){
+
+            throwCount++;
+            return false;
+
+        }
+
+        return true;
     }
 
 }

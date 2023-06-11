@@ -7,10 +7,12 @@ public class Game : MonoBehaviour
 
     public Player[] players = new Player[4];
     private CameraHandler cameraScript;
+
+    public GameObject ui;
     
     [Range(1,4)]
     int playerCount = 1;
-    int currentPlayerIndex = 0;
+    public static int currentPlayerIndex = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +37,12 @@ public class Game : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow)) NextPlayer();
     }
 
-    void NextPlayer(){
+    public void NextPlayer(){
 
         currentPlayerIndex++;
-        if(currentPlayerIndex > 3) currentPlayerIndex = 0;
-        cameraScript.NextPlayer(currentPlayerIndex);
+        if(currentPlayerIndex > 4) currentPlayerIndex = 1;
+        cameraScript.NextPlayer((Team)currentPlayerIndex);
+        ui.SendMessage("NextPlayer");
         //players[currentPlayerIndex].CanMove();
 
     }

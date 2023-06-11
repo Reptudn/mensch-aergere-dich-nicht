@@ -21,11 +21,11 @@ public class MouseHandler : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out RaycastHit hit, 100f)){
 
+            //if(lastHit != null && hit.transform.gameObject != lastHit) Debug.Log("Ray hit: " + lastHit.name);
+
             lastHit = hit.transform.gameObject;
 
-            Debug.Log("Ray hit: " + lastHit.name);
-
-            if(Input.GetMouseButton(0)) hit.transform.gameObject.SendMessage("OnLeftClick"); //left mouse btn
+            if(Input.GetMouseButton(0)) hit.transform.gameObject.BroadcastMessage("OnLeftClick"); //left mouse btn
             else if(Input.GetMouseButton(1)) hit.transform.gameObject.SendMessage("OnRightClick"); //right mouse btn
             else try { hit.transform.gameObject.SendMessage("OnHoverEnter"); } catch { return; } //mouse hover
 

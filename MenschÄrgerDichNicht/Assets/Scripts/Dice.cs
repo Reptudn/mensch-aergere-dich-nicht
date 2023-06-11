@@ -27,7 +27,7 @@ public class Dice : MonoBehaviour, IInteractable
   
     private bool canBeThrown = true;
 
-    [SerializeField] int number = -1;
+    public static int number = -1;
 
     Rigidbody rb;
     GameObject dice;
@@ -55,7 +55,7 @@ public class Dice : MonoBehaviour, IInteractable
 
     }
 
-    public void SetDice6Number(int number) => this.number = number;
+    public void SetDice6Number(int _number) => number = _number;
 
     public void Throw(){
 
@@ -68,7 +68,7 @@ public class Dice : MonoBehaviour, IInteractable
         rb = _dice.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(0f, Random.Range(5f, 10f), 0f), ForceMode.Impulse);
         rb.AddTorque(transform.up * 10);
-        rb.AddTorque(transform.forward * 7);
+        rb.AddTorque(transform.forward * 60);
 
     }
 
@@ -120,21 +120,23 @@ public class Dice : MonoBehaviour, IInteractable
                 break;
 
             default:
-                Debug.Log("Invalid Collision!");
+                //Debug.Log("Invalid Collision!");
                 break;
 
         }
 
         ui.GetComponent<InGameUiHandler>().SetRolledAmountText(number);
-        RemoveDice();
+        StartCoroutine(RemoveDice());
 
     }
 
     IEnumerator RemoveDice(){
-        yield return new WaitForSecondsRealtime(0.3f);
+
+        yield return new WaitForSeconds(1);
 
         rb = null;
         Destroy(dice);
+
     }
 
 }

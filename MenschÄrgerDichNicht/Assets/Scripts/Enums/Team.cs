@@ -1,9 +1,9 @@
 public enum Team {
 
     UNSIGNED = 0,
-    RED = 1,
+    RED = 3,
     GREEN = 2,
-    YELLOW = 3,
-    BLUE = 4
+    YELLOW = 4,
+    BLUE = 1
 
 }
